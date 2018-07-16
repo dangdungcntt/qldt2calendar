@@ -41,7 +41,7 @@ class GoogleCalendarApi
 				'timeZone' => $timezone
 			],
 			'end' => [
-				'dateTime' => $event['start_time'],
+				'dateTime' => $event['end_time'],
 				'timeZone' => $timezone
 			],
 			'recurrence' => [
