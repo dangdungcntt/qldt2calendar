@@ -93,6 +93,24 @@ function parseRawData($raw)
     return $data;
 }
 
+function parseRawDataLichThi($raw)
+{
+    $date = date_create_from_format('d/m/Y H:i', $raw['ngayThi'] . ' ' . $raw['caThi']);
+    $arr = explode(':', $raw['caThi']);
+    $startTime = $raw['caThi'];
+    $endTime = (intval($arr[0]) + 2) . ':' . $arr[1];
+
+    $data[] = [
+        'summary' => trim($raw['lopHocPhan']),
+        'location' => trim($raw['diaDiem']),
+        'start_time' => $date->format('Y-m-d\T') . $startTime . ':00',
+        'end_time' => $date->format('Y-m-d\T') . $endTime . ':00',
+        'until' => $date->format('Y-m-d')
+    ];
+
+    return $data;
+}
+
 function dd($var)
 {
     if (is_array($var)) {

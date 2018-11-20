@@ -33,14 +33,14 @@ require_once __DIR__ . '/' . 'helper.php';
 try {
 	// Get input data
 	$data = $_POST['data'];
-
+	$ajaxType = $_POST['ajax_type'] ?: 'lich_hoc';
 	$capi = new GoogleCalendarApi($_POST['access_token']);
 	$userTimezone = $capi->GetUserCalendarTimezone();
 	$listEvents = [];
 
 	foreach($data as $raw) {
 
-		$events = parseRawData($raw);
+		$events = $ajaxType == 'lich_thi' ? parseRawDataLichThi($raw) : parseRawData($raw);
 
 		foreach ($events as $event) {
 			$listEvents[] = GoogleCalendarApi::BuildEvent($event, $userTimezone);
